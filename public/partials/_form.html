@@ -1,23 +1,37 @@
-<div class="form-group">
+<div class="form-group" ng-class="{ 'has-error' : productForm.product_name.$invalid && productForm.product_name.$dirty }">
   <label class="col-sm-2 control-label">Name</label>
   <div class="col-sm-10">
-    <input type="text" ng-model="product.name" class="form-control" placeholder="Product Name Here"/>
+    <input type="text" name="product_name" ng-model="product.name" class="form-control" placeholder="Product Name Here" required ng-minlength=5 ng-maxlength=60>
+    <div class="error" ng-show="productForm.product_name.$dirty && productForm.product_name.$invalid">
+      <p class="help-block" ng-show="productForm.product_name.$error.required">Please input a product name</p>
+      <p class="help-block" ng-show="productForm.product_name.$error.minlength">The product name is required to be at least 5 characters</p>
+      <p class="help-block" ng-show="productForm.product_name.$error.maxlength">The product name cannot be longer than 60 characters</p>
+    </div>
   </div>
 </div>
-<div class="form-group">
+<div class="form-group" ng-class="{ 'has-error' : productForm.product_price.$invalid && productForm.product_price.$dirty }">
   <label class="col-sm-2 control-label">Price</label>
   <div class="col-sm-10">
-    <input type="text" ng-model="product.price" class="form-control" placeholder="Product Price Here"/>
+    <input type="number" name="product_price" ng-model="product.price" class="form-control" placeholder="Product Price Here" required>
+    <div class="error" ng-show="productForm.product_price.$dirty && productForm.product_price.$invalid">
+      <p class="help-block" ng-show="productForm.product_price.$error.required">Please input a product price</p>
+      <p class="help-block" ng-show="productForm.product_price.$error.number">Please input a valid product price</p>
+    </div>
   </div>
 </div>
-<div class="form-group">
+<div class="form-group" ng-class="{ 'has-error' : productForm.product_discount.$invalid && productForm.product_discount.$dirty }">
   <label class="col-sm-2 control-label">Discount (0 for none)</label>
   <div class="col-sm-10">
-    <input type="text" ng-model="product.discount" class="form-control" placeholder="Product Discount Here"/>
+    <input type="number" name="product_discount" ng-model="product.discount" class="form-control" placeholder="Product Discount Here" required ng-pattern="/^0(\.[0-9]{1,2})?$/" step="0.01">
+    <div class="error" ng-show="productForm.product_discount.$dirty && productForm.product_discount.$invalid">
+      <p class="help-block" ng-show="productForm.product_discount.$error.required">Please input a product discount</p>
+      <p class="help-block" ng-show="productForm.product_discount.$error.number">Please input a valid product discount</p>
+      <p class="help-block" ng-show="productForm.product_discount.$error.pattern">Product discount must lie within 0 and 0.99 (inclusive), with two decimal places.</p>
+    </div>
   </div>
 </div>
 <div class="form-group">
   <div class="col-sm-offset-2 col-sm-10">
-    <input type="submit" class="btn btn-primary" value="Save"/>
+    <input type="submit" class="btn btn-primary" value="Save" ng-disabled="productForm.$invalid">
   </div>
 </div>
