@@ -1,5 +1,17 @@
 var Product = require('../models/product');
 
+function validationErrors(err, _default) {
+  var message = _default;
+  if (err.errors) {
+    var errArray = []
+    for (var i in err.errors) {
+      errArray.push(err.errors[i].message);
+    }
+    message = errArray.join(' ');
+  }
+  return message;
+}
+
 exports._index = function(req, res, next){
   Product.find(function(err, products) {
     if (err) {
@@ -19,7 +31,7 @@ exports.create = function(req, res, next){
 
   product.save(function(err, product) {
     if (err) {
-      res.status(404).send({ error : 'Unable to add a new product' });
+      res.status(404).send({ error : validationErrors(err, 'Unable to add a new product') });
     } else {
       res.json({ message: 'Product added!', product: product });
     }
@@ -40,9 +52,9 @@ exports.show = function(req, res, next){
 };
 
 exports.update = function(req, res, next){
-  Product.findByIdAndUpdate(req.params.product_id, req.body, function(err, product) {
+  Product.findByIdAndUpdate(req.params.product_id, req.body, { new: true, runValidators: true }, function(err, product) {
     if (err) {
-      res.status(404).send({ error : 'Unable to find product!' });
+      res.status(404).send({ error : validationErrors(err, 'Unable to find product!') });
     } else {
       res.json({ message: 'Product updated!', product: product });
     }
