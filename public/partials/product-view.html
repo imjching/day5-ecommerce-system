@@ -1,0 +1,25 @@
+<table class="table">
+  <tr>
+    <td><h3>Details for {{ product.title }}</h3></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Product name</td>
+    <td>{{ product.name }}</td>
+  </tr>
+  <tr>
+    <td>Product List Price</td>
+    <td style="text-decoration: line-through;">{{ product.price }}</td>
+  </tr>
+  <tr>
+    <td>Product Price</td>
+    <td>{{ product.price | afterDiscount:product.discount }}</td>
+  </tr>
+  <tr>
+    <td>Product Discount</td>
+    <td>{{ product.discount | inPercentage }}</td>
+  </tr>
+</table>
+<div>
+  <a class="btn btn-primary" ng-href="#/products/{{ productId }}/edit">Edit</a>
+</div>
