@@ -1,4 +1,4 @@
-var app = angular.module('amazonApp', ['ngRoute', 'amazonApp.controllers', 'amazonApp.filters']);
+var app = angular.module('amazonApp', ['ngRoute', 'amazonApp.controllers', 'amazonApp.filters', 'ngResource', 'amazonApp.services']);
 
 app.config(['$routeProvider', function($routeProvider) {
 

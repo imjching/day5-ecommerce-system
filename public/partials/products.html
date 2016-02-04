@@ -10,8 +10,8 @@
   <tr ng-repeat="product in products">
     <td>{{ product.name }}</td>
     <td>
-      <a class="btn btn-primary" ng-href="#/products/{{ $index }}">View</a>
-      <a class="btn btn-danger" ng-click="deleteProduct($index)">Delete</a>
+      <a class="btn btn-primary" ng-href="#/products/{{ product._id }}">View</a>
+      <a class="btn btn-danger" ng-click="deleteProduct(product)">Delete</a>
     </td>
   </tr>
 </table>

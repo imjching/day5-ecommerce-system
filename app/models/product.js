@@ -3,8 +3,8 @@ var Schema = mongoose.Schema;
 
 var ProductSchema = new mongoose.Schema({
   name: String,
-  isbn: String,
-  description: String,
+  price: Number,
+  discount: Number,
   created_at: {type: Date, default: Date.now}
 });
 

@@ -13,8 +13,8 @@ exports._index = function(req, res, next){
 exports.create = function(req, res, next){
   var product = new Product({
     name: req.body.name,
-    isbn: req.body.isbn,
-    description: req.body.description
+    price: req.body.price,
+    discount: req.body.discount
   });
 
   product.save(function(err, product) {
