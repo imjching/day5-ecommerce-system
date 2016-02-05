@@ -20,4 +20,7 @@ function checkDiscount(v) {
   return /^0(\.[0-9]{1,2})?$/.test(v.toString());
 }
 
+var updated_at = require('./updated_at_plugin');
+ProductSchema.plugin(updated_at);
+
 module.exports = mongoose.model('Product', ProductSchema);

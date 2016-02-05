@@ -2,13 +2,16 @@
   <tr>
     <td><h3>All Products</h3></td>
     <td></td>
+    <td></td>
   </tr>
   <tr ng-show="products.length === 0">
     <td>No products available</td>
     <td></td>
+    <td></td>
   </tr>
   <tr ng-repeat="product in products">
     <td>{{ product.name }}</td>
+    <td>{{ product.updated_at | date:'h:mm:ss a' }}</td>
     <td>
       <a class="btn btn-primary" ng-href="#/products/{{ product._id }}">View</a>
       <a class="btn btn-danger" ng-click="deleteProduct(product)">Delete</a>

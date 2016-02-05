@@ -52,11 +52,21 @@ exports.show = function(req, res, next){
 };
 
 exports.update = function(req, res, next){
-  Product.findByIdAndUpdate(req.params.product_id, req.body, { new: true, runValidators: true }, function(err, product) {
-    if (err) {
-      res.status(404).send({ error : validationErrors(err, 'Unable to find product!') });
+  Product.findById(req.params.product_id, function(err, product) {
+    if (product) {
+      product.name = req.body.name,
+      product.price = req.body.price,
+      product.discount = req.body.discount
+
+      product.save(function(err) {
+        if (err) {
+          res.status(404).send({ error : validationErrors(err, 'Unable to find product!') });
+        } else {
+          res.json({ message: 'Product updated!', product: product });
+        }
+      });
     } else {
-      res.json({ message: 'Product updated!', product: product });
+      res.status(404).send({ error : 'Unable to find product!' });
     }
   });
 
